@@ -56,6 +56,15 @@ def get_cookies() -> (Optional[List[Dict]], Optional[List[Dict]]):
         
         accounts_config = config_data.get("accounts", [])
         assist_groups = config_data.get("assist_groups", [])
+        # 补充环境变量
+        for k in accounts_config[0]:
+            if os.getenv(k):
+                v = os.getenv(k)
+                accounts_config[0][k] = v
+        for k in assist_groups[0]:
+            if os.getenv(k):
+                v = os.getenv(k)
+                assist_groups[0][k] = v
 
         # 固定配置模板
         fixed_config = {
@@ -739,7 +748,44 @@ async def run_assist_tasks(assist_groups: List[Dict], accounts_map: Dict):
                 
                 await asyncio.sleep(random.uniform(2, 4))
 
-def send_notification(all_results: List[str]):
+
+def send_notification(all_results: List[str]):   
+    """汇总所有结果并推送飞书通知"""
+    if not all_results:
+        logger.info("没有可通知的结果。")
+        return
+
+    # ===================== 只需要填这里 =====================
+    FEISHU_WEBHOOK = f"https://open.feishu.cn/open-apis/bot/v2/hook/{os.getenv('FSKEY')}"
+    # ========================================================
+
+    if not FEISHU_WEBHOOK:
+        logger.warning("未配置飞书机器人 WEBHOOK，跳过通知。")
+        return
+
+    # 拼接消息内容
+    final_content = "\n\n".join(all_results)
+    title = "龙湖天街任务通知"
+    msg = f"{title}\n\n{final_content}"
+
+    # 飞书消息格式
+    payload = {
+        "msg_type": "text",
+        "content": {
+            "text": msg
+        }
+    }
+
+    try:
+        resp = requests.post(
+            FEISHU_WEBHOOK,
+            data=json.dumps(payload),
+            headers={"Content-Type": "application/json"}
+        )
+        logger.info(f"飞书通知已发送：{resp.text}")
+    except Exception as e:
+        logger.error(f"飞书通知发送失败：{str(e)}")
+def send_notificationDD(all_results: List[str]):
     """汇总所有结果并推送钉钉通知"""
     if not all_results:
         logger.info("没有可通知的结果。")
