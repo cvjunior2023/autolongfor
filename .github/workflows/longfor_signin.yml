@@ -73,12 +73,12 @@ jobs:
 
       - name: 执行签到脚本
         env:
-          account_id: ${{ secrets.account_id }}
-          userName: ${{ secrets.userName }}
-          x-lf-dxrisk-token: ${{ secrets.x-lf-dxrisk-token }}
-          token: ${{ secrets.token }}
-          x-lf-usertoken: ${{ secrets.x-lf-usertoken }}
-          cookie: ${{ secrets.FSKEY }}
+          account_id: ${{ secrets.ACCOUNT_ID }}
+          userName: ${{ secrets.USERNAME }}
+          x-lf-dxrisk-token: ${{ secrets.X_LF_DXRISK_TOKEN }}
+          token: ${{ secrets.TOKEN }}
+          x-lf-usertoken: ${{ secrets.X_LF_USERTOKEN }}
+          cookie: ${{ secrets.COOKIE }}
           FSKEY: ${{ secrets.FSKEY }}
         run: python main.py
 
