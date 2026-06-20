@@ -1,0 +1,15 @@
+﻿services:
+  autolongfor:
+    image: ghcr.io/cvjunior2023/autolongfor:main
+    container_name: autolongfor
+    restart: "no"
+    volumes:
+      # 持久化助力状态，容器删除后不会丢失
+      - ./data:/data
+      # 用户配置文件，把 lhtj_data.json 放当前目录即可
+      - ./lhtj_data.json:/app/lhtj_data.json
+    environment:
+      TZ: Asia/Shanghai
+    # 如需只跑部分任务，取消注释对应行：
+    # command: ["python", "main.py", "--basic-only"]
+    # command: ["python", "main.py", "--assist-only"]

@@ -1,20 +1,20 @@
-{
+﻿{
   "accounts": [
     {
-      "account_id": "手机号",
-      "userName": "账号名称",
-      "x-lf-dxrisk-token": "安全令牌",
+      "account_id": "138xxxxxxxx",
+      "userName": "你的昵称",
+      "x-lf-dxrisk-token": "从抓包获取",
       "x-lf-channel": "C2",
-      "token": "用户令牌",
-      "x-lf-usertoken": "用户令牌",
-      "cookie": "会话Cookie",
+      "token": "从抓包获取",
+      "x-lf-usertoken": "从抓包获取",
+      "cookie": "从抓包获取",
       "x-lf-bu-code": "C20400",
       "x-lf-dxrisk-source": "5"
     }
   ],
   "assist_groups": [
     {
-      "group_name": "组名",
+      "group_name": "示例助力组",
       "master": "主账号ID",
       "followers": ["从账号ID1", "从账号ID2"]
     }
