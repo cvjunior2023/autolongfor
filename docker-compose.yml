@@ -7,4 +7,5 @@
       - ./data:/data
       - ./lhtj_data.json:/app/lhtj_data.json
     environment:
+      - FSKEY=${FSKEY}
       TZ: Asia/Shanghai
