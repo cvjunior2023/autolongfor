@@ -1,8 +1,6 @@
 ﻿#!/bin/bash
 # ============================================================
 # 龙湖天街自动化签到 - 服务器一键部署脚本
-# 用法（在服务器上以 root 执行）：
-#   bash deploy.sh
 # ============================================================
 set -e
 
@@ -27,7 +25,7 @@ else
   info "Docker 安装完成：$(docker --version)"
 fi
 
-step "2/7  配置 Docker 镜像加速（国内加速器）"
+step "2/7  配置 Docker 镜像加速"
 DAEMON=/etc/docker/daemon.json
 if [ -f "$DAEMON" ] && grep -q "registry-mirrors" "$DAEMON"; then
   info "镜像加速器已配置，跳过"
@@ -75,9 +73,8 @@ else
 fi
 
 step "5/7  拉取 Docker 镜像"
-IMAGE=ghcr.io/cvjunior2023/autolongfor:main
-echo "拉取镜像：$IMAGE"
-docker pull "$IMAGE"
+echo "拉取镜像（从阿里云 ACR）..."
+docker compose -f "$BASE/docker-compose.yml" pull
 info "镜像拉取完成"
 
 step "6/7  测试运行"
