@@ -1,4 +1,6 @@
-__pycache__
+﻿__pycache__
 /config
 .vscode
 .env
+assist_status.json
+.DS_Store

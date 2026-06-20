@@ -1,0 +1,22 @@
+﻿# Git
+.git
+.gitignore
+
+# Python
+__pycache__
+*.pyc
+*.pyo
+.venv
+venv
+env
+
+# IDE
+.vscode
+.idea
+
+# Local config
+.env
+/config
+
+# Data (generated at runtime)
+assist_status.json
