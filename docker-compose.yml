@@ -1,6 +1,6 @@
 ﻿services:
   autolongfor:
-    image: registry.cn-hangzhou.aliyuncs.com/你的命名空间/autolongfor:main
+    image: crpi-9tzyvu07uw73gfd7.cn-hangzhou.personal.cr.aliyuncs.com/cvjunior2023/autolongfor:main
     container_name: autolongfor
     restart: "no"
     volumes:
